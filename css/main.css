@@ -8,6 +8,19 @@ html, body {
     height: 100%;
 }
 
+#list {
+    position: absolute;
+    left: 15px;
+    top: 50px;
+    top: 0px;
+    width: 250px;
+    height: 200px;
+    z-index: 2;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 300;
+}
+
 .controls {
     margin-top: 10px;
     border: 1px solid transparent;

@@ -7,6 +7,10 @@
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
+    
+    <div>
+    <select id="list" multiple="multiple" height="15" data-bind="options:allItems, selectedOptions:selectedItems" style="top: 700px"> </select>
+    </div>
     <input placeholder="Search Box" type="search" data-bind="value: filter, valueUpdate: 'afterkeydown'" autocomplete="off" class="controls" id="pac-input">
     <div id="map"></div>
     
