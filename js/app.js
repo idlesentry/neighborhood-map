@@ -74,9 +74,23 @@ function initMap() {
 
 
 var BetterListModel = function () {
-  this.filteredItem = ko.observable("");
+  
+  // this.filter = function() {
+  //    for (i = 0; i < locations.length; i++){
+  //   var remaining = ko.observableArray();
+
+  //   if (filter === locations[i].type){
+  //     remaining.push(locations[i].name);
+  //   }
+  // }
+  // }
+
+  // var filter = this.filter;
 
   var names = ko.observableArray();
+
+  // names.removeAll();
+  // names.push(remaining);
 
   for (i = 0; i < locations.length; i++){
     names.push(locations[i].name);

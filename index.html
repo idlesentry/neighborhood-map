@@ -8,15 +8,14 @@
   </head>
   <body>
   
-    <!-- <form id="form" style="top:675px" data-bind="submit:filter">
-    Filter: <input type="text" data-bind='value:filteredItem, valueUpdate: "afterkeydown"' />
-    <button type="submit" data-bind="enable: filteredItem().length > 0">Add</button>
-    </form> -->
+    <form id="form" style="top:58%" >
+    Filter: <input type="text" >
+    </form>
  
     <div>
-    <select id="list" multiple="multiple" height="15" data-bind="options:allItems" style="top: 700px"> </select>
+    <select id="list" multiple="multiple" height="15" data-bind="options:allItems" style="top: 65%"> </select>
     </div>
-    <input placeholder="Search Box" type="search" data-bind="value: filter, valueUpdate: 'afterkeydown'" autocomplete="off" class="controls" id="pac-input">
+    <!-- <input placeholder="Search Box" type="search" data-bind="value: filter, valueUpdate: 'afterkeydown'" autocomplete="off" class="controls" id="pac-input"> -->
     <div id="map"></div>
     
     <script src="js/knockout-3.4.0.js"></script>
