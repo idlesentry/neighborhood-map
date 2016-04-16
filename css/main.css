@@ -1,4 +1,4 @@
-html, body {
+/*html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -8,28 +8,38 @@ html, body {
     height: 100%;
 }
 
-#form {
-    position: absolute;
-    left: 15px;
-    width: 250px;
-    height: 200px;
-    z-index: 2;
+#content {
     font-family: Roboto;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 300;
 }
 
-#list {
+#form {
     position: absolute;
-    left: 15px;
-    top: 50px;
-    top: 0px;
-    width: 250px;
-    height: 200px;
+    left: 3%;
+    top: 65%;
+    width: 12%;
+    height: 5%;
     z-index: 2;
     font-family: Roboto;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 600;
+    background-color: #white;
+}
+
+.list {
+    position: absolute;
+    left: 3%;
+    top: 50px;
+    top: 70%;
+    width: 12%;
+    height: 25%;
+    z-index: 2;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
 }
 
 .controls {
@@ -79,4 +89,44 @@ html, body {
     <style>
       #target {
     width: 345px;
+}*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+}
+
+input {
+  position: fixed;
+  right: 20px;
+  bottom: 30%;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+}
+
+#list-view {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-left: 20px;
+  padding: 2px 0;
+  font: 12px sans-serif;
 }
