@@ -12,7 +12,7 @@
 
     <input type="search" placeholder="Filter Places" data-bind="textInput: userInput, event: {keyup: filterMarkers}">
     
-    <ul id="list-view" data-bind="foreach: visiblePlaces, click: listClick">
+    <ul id="list-view" data-bind="foreach: visiblePlaces, click: $parent.listClick">
       <li data-bind="text: name"></li>
     </ul>
    

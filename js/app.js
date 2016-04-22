@@ -66,26 +66,29 @@ var viewModel = function () {
     self.allPlaces.push(new Place(place));
   });
 
+  var markers = [];
   var infowindow = new google.maps.InfoWindow;
   
   // Creating markers
   self.allPlaces.forEach(function(place) {
-  var markerOptions = {
-    map: self.googleMap,
-    position: place.latLng
-  };
+  
 
-        
   for (i = 0; i < locationData.length; i++) {
 
-    place.marker = new google.maps.Marker(markerOptions);
+    var latString = JSON.stringify(locationData[i].lat);
+    var lngString = JSON.stringify(locationData[i].lng);
 
+    place.marker = new google.maps.Marker({
+      position: locationData[i].latLng,
+      map: self.googleMap,
+    });
+    markers.push(place.marker);
 
     google.maps.event.addListener(place.marker, 'click', (function(place, i) {
         return function() {
 
           self.googleMap.setZoom(17);
-          self.googleMap.setCenter(place.marker.getPosition());
+          self.googleMap.setCenter(locationData[i].latLng);
           // place.marker.setAnimation(google.maps.Animation.BOUNCE);
           //   window.setTimeout(function () {
           //     place.marker.setAnimation(null);
@@ -114,12 +117,12 @@ var viewModel = function () {
           '</div>';
           
           infowindow.setContent(contentString);
-          infowindow.open(self.googleMap, place.marker);
+          infowindow.open(self.googleMap, this);
         };
       })(place, i));
 
-      self.listClick = function() {
-        google.maps.event.trigger(place.marker,'click');
+      self.listClick = function(place) {
+        google.maps.event.trigger(place.markers,'click');
       };
     } //end of for loop
   
@@ -160,10 +163,8 @@ var viewModel = function () {
   function Place(dataObj) {
     this.name = dataObj.name;
     this.latLng = dataObj.latLng;
-    this.markerArray = [];
-    this.info = [];
     
-    // this.marker = null;
+    this.marker = [];
   }
 
 };
