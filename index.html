@@ -7,27 +7,18 @@
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
-  
-    <!-- <form id="form" style="top:55%">
-    Filter: <input type="text"/>
-    </form>
- 
-   <div>
-    
-    <select class="list" id="list" multiple="true" height="15" data-bind="options: listedItems, click: onChange" style="top: 65%"> </select>
-    </div> -->
 
     <div id="map"></div>
 
-    <input type="search" placeholder="keyword search..." data-bind="textInput: userInput, event: {keyup: filterMarkers}">
+    <input type="search" placeholder="Filter Places" data-bind="textInput: userInput, event: {keyup: filterMarkers}">
     
-    <ul id="list-view" data-bind="foreach: visiblePlaces">
+    <ul id="list-view" data-bind="foreach: visiblePlaces, click: listClick">
       <li data-bind="text: name"></li>
     </ul>
    
     <script src="js/knockout-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCQmZ7ZUsAhdxqWScMVhR1j7h66ynLzi9g"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
