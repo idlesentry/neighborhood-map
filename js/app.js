@@ -14,7 +14,7 @@ var locationData = [
         lat: 48.747622,
         lng: -122.478530,
         address: "114 W Magnolia St, Bellingham, WA 98225",
-        category: "cafe",
+        category: "cafe, coffee",
         link: "http://theunioncoffee.com/"
       },
       {
@@ -23,7 +23,7 @@ var locationData = [
         lat: 48.747631,
         lng: -122.477969,
         address: "1220 N State St, Bellingham, WA 98225",
-        category: "bar",
+        category: "bar, food",
         link: "https://www.facebook.com/theracketbham/"
       },
       {
@@ -32,7 +32,7 @@ var locationData = [
         lat: 48.747830,
         lng: -122.477539,
         address: "1232 N State St, Bellingham, WA 98225",
-        category: "restaurant",
+        category: "restaurant, food",
         link: "http://www.rudysbham.com/"
       },
       {
@@ -41,8 +41,35 @@ var locationData = [
         lat: 48.749717,
         lng: -122.477788,
         address: "1313 Railroad Ave, Bellingham, WA 98225",
-        category: "restaurant",
+        category: "restaurant, food",
         link: "http://avenuebread.com/"
+      },
+      {
+        name: "Redlight",
+        latLng: {lat: 48.745839, lng: -122.481337},
+        lat: 48.745839,
+        lng: -122.481337,
+        address: "1017 N State St, Bellingham, WA 98225",
+        category: "bar",
+        link: "http://www.redlightbellingham.com/"
+      },
+      {
+      name: "EAT",
+      latLng: {lat: 48.748775, lng: -122.480317},
+      lat: 48.748775,
+      lng: -122.480317,
+      address: "1200 Cornwall Ave, Bellingham, WA 98225",
+      category: "restaurant, bar, food",
+      link: "http://www.4u2eat.com/"
+      },
+      {
+      name: "Old World Deli",
+      latLng: {lat: 48.747750, lng: -122.477694},
+      lat: 48.747750,
+      lng: -122.477694,
+      address: "1228 N State St, Bellingham, WA 98225",
+      category: "restaurant, food",
+      link: "http://www.oldworlddeli1.com/"
       }
   ];
 
@@ -51,7 +78,7 @@ var viewModel = function () {
   var self = this;
 
   self.googleMap = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 48.748767, lng: -122.477416},
+    center: {lat: 48.747713, lng: -122.478874},
     zoom: 17
   });
   
@@ -87,7 +114,7 @@ var viewModel = function () {
     google.maps.event.addListener(place.marker, 'click', (function(place, i) {
         return function() {
 
-          self.googleMap.setZoom(17);
+          self.googleMap.setZoom(18);
           self.googleMap.setCenter(locationData[i].latLng);
           // place.marker.setAnimation(google.maps.Animation.BOUNCE);
           //   window.setTimeout(function () {
@@ -122,7 +149,7 @@ var viewModel = function () {
       })(place, i));
 
       self.listClick = function(place) {
-        google.maps.event.trigger(place.markers,'click');
+        google.maps.event.trigger(markers[i],'click');
       };
     } //end of for loop
   
@@ -151,6 +178,9 @@ var viewModel = function () {
       if (place.name.toLowerCase().indexOf(searchInput) !== -1) {
         self.visiblePlaces.push(place);
       }
+      else if (place.category.toLowerCase().indexOf(searchInput) !== -1) {
+        self.visiblePlaces.push(place);
+      }
     });
     
     
@@ -163,6 +193,7 @@ var viewModel = function () {
   function Place(dataObj) {
     this.name = dataObj.name;
     this.latLng = dataObj.latLng;
+    this.category = dataObj.category;
     
     this.marker = [];
   }
