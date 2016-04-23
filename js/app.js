@@ -93,7 +93,6 @@ var viewModel = function () {
     self.allPlaces.push(new Place(place));
   });
 
-  var markers = [];
   var infowindow = new google.maps.InfoWindow;
   
   // Creating markers
@@ -109,8 +108,8 @@ var viewModel = function () {
       position: locationData[i].latLng,
       map: self.googleMap,
     });
-    markers.push(place.marker);
 
+    //click event for map
     google.maps.event.addListener(place.marker, 'click', (function(place, i) {
         return function() {
 
@@ -147,14 +146,14 @@ var viewModel = function () {
           infowindow.open(self.googleMap, this);
         };
       })(place, i));
-
-      self.listClick = function(place) {
-        google.maps.event.trigger(markers[i],'click');
-      };
-    } //end of for loop
+    } //end of for loop 
+  }); //end of self.allplaces.foreach
   
-  });
-  
+  //click event for list
+  self.listClick = function(place) {
+    google.maps.event.trigger(place.marker,'click');
+    console.log(place.category);
+  };
   
   // Declaring all places as visible initially
   self.visiblePlaces = ko.observableArray();
@@ -194,85 +193,11 @@ var viewModel = function () {
     this.name = dataObj.name;
     this.latLng = dataObj.latLng;
     this.category = dataObj.category;
-    
-    this.marker = [];
+    this.marker = ko.observableArray();
   }
 
 };
 
 ko.applyBindings(new viewModel());
-
-
-
-
-
-//initializing map
-// function view() {
-//   var myLatLng = {lat: 48.748767, lng: -122.477416};
-
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//     zoom: 17,
-//     center: myLatLng
-//   });
-
-//   var gmarkers = [];
-//   var infowindow = new google.maps.InfoWindow;
-
-  
-//   //creates markers
-//   var marker, i;
-//   for (i = 0; i < locations.length; i++) {
-//     var latString = JSON.stringify(locations[i].lat);
-//     var lngString = JSON.stringify(locations[i].lng);
-
-//     marker = new google.maps.Marker({
-//       position: new google.maps.LatLng(latString, lngString),
-//       map: map,
-//       title: locations[i].name
-//     });
-
-//     //gathers all markers into an array
-//     gmarkers.push(marker);
-
-//     google.maps.event.addListener(marker, 'click', (function(marker, i) {
-//         return function() {
-
-//           //zooms and bounces marker upon clicking
-//           map.setZoom(17);
-//           map.setCenter(marker.getPosition());
-//           marker.setAnimation(google.maps.Animation.BOUNCE);
-//             window.setTimeout(function () {
-//               marker.setAnimation(null);
-//             }, 1500);
-
-//           //formatting and gathering address and streetview image for each markers infowindow
-          // var img = "https://maps.googleapis.com/maps/api/streetview?size=200x100&location=" + latString + ',' + lngString + "";
-          // var address = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latString + ',' + lngString + "";
-
-          // //this is what will display in the infowindow
-          // var contentString =
-          //   '<div id="content">'+
-          //   '<div id="siteNotice">'+
-          //   '</div>'+
-          //   '<h1 id="firstHeading" class="firstHeading">' + locations[i].name + '</h1>'+
-          //   '<div id="bodyContent">'+
-          //   '<img src=' + img + '>' +
-          //   '<p>' + locations[i].address + '</p>' +
-          //   '<p> <a href=' + locations[i].link + '> '+
-          //   'Website</a> ' +
-          //   '</p>' +
-          //   '</div>'+
-          //   '</div>';
-          
-          // infowindow.setContent(contentString);
-          // infowindow.open(map, marker);
-      //   };
-      // })(marker, i));
-  
-//   } //end of for loop
-
-        
-// };//end of view function
-// view();
 
 
