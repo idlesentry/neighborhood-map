@@ -54,51 +54,51 @@ var locationData = [
     link: "http://www.redlightbellingham.com/"
   },
   {
-  name: "EAT",
-  latLng: {lat: 48.748775, lng: -122.480317},
-  lat: 48.748775,
-  lng: -122.480317,
-  address: "1200 Cornwall Ave, Bellingham, WA",
-  category: "restaurant, bar, food",
-  link: "http://www.4u2eat.com/"
+    name: "EAT",
+    latLng: {lat: 48.748775, lng: -122.480317},
+    lat: 48.748775,
+    lng: -122.480317,
+    address: "1200 Cornwall Ave, Bellingham, WA",
+    category: "restaurant, bar, food",
+    link: "http://www.4u2eat.com/"
   },
   {
-  name: "Old World Deli",
-  latLng: {lat: 48.747750, lng: -122.477694},
-  lat: 48.747750,
-  lng: -122.477694,
-  address: "1228 N State St, Bellingham, WA",
-  category: "restaurant, food",
-  link: "http://www.oldworlddeli1.com/"
+    name: "Old World Deli",
+    latLng: {lat: 48.747750, lng: -122.477694},
+    lat: 48.747750,
+    lng: -122.477694,
+    address: "1228 N State St, Bellingham, WA",
+    category: "restaurant, food",
+    link: "http://www.oldworlddeli1.com/"
   },
   {
-  name: "Avellino",
-  latLng: {lat: 48.750064, lng: -122.477257},
-  lat: 48.750064,
-  lng: -122.477257,
-  address: "1329 Railroad Ave, Bellingham, WA",
-  category: "cafe, coffee, food",
-  link: "http://www.espressoavellino.com/"
+    name: "Avellino",
+    latLng: {lat: 48.750064, lng: -122.477257},
+    lat: 48.750064,
+    lng: -122.477257,
+    address: "1329 Railroad Ave, Bellingham, WA",
+    category: "cafe, coffee, food",
+    link: "http://www.espressoavellino.com/"
   },
   {
-  name: "Adagio",
-  latLng: {lat: 48.751192, lng: -122.475510},
-  lat: 48.751192,
-  lng: -122.475510,
-  address: "1435 Railroad Ave, Bellingham, WA",
-  category: "cafe, coffee, food",
-  link: "https://locu.com/places/caffe-adagio-bellingham-us/#menu/"
+    name: "Adagio",
+    latLng: {lat: 48.751192, lng: -122.475510},
+    lat: 48.751192,
+    lng: -122.475510,
+    address: "1435 Railroad Ave, Bellingham, WA",
+    category: "cafe, coffee, food",
+    link: "https://locu.com/places/caffe-adagio-bellingham-us/#menu/"
   }
 ];
 
-var Place = function (dataObj) {
-  this.name = dataObj.name;
-  this.latLng = dataObj.latLng;
-  this.category = dataObj.category;
-  this.address = dataObj.address;
-  this.link = dataObj.link;
-  this.lat = dataObj.lat;
-  this.lng = dataObj.lng;
+var Place = function (data) {
+  this.name = data.name;
+  this.latLng = data.latLng;
+  this.category = data.category;
+  this.address = data.address;
+  this.link = data.link;
+  this.lat = data.lat;
+  this.lng = data.lng;
   this.marker = ko.observableArray();
 }
 
