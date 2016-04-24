@@ -55,6 +55,9 @@ html, body {
 }
 
 #content {
+  line-height: 50%;
+  height: 225px;
+  width: 325px;
   font-family: Roboto;
   font-size: 13px;
   font-weight: 500;

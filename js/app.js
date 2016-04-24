@@ -241,14 +241,14 @@ var viewModel = function () {
         }
 
         if (venueURL) {
-          $windowContent.append('<p> <a href="'+ venueURL + '">' + venueURL + ' </a></p>');
+          $windowContent.append('<p> Website: <a href="'+ venueURL + '">' + venueURL + ' </a></p>');
         }
         else{
           $windowContent.append('<p> <a href="'+ place.link + '">' + place.link + ' </a></p>');
         }
 
         if (venuePhone) {
-          $windowContent.append('<p>'+venuePhone+'</p>');
+          $windowContent.append('<p> Phone: '+venuePhone+'</p>');
         }
         else{
           $windowContent.append('<p> Phone number not found</p>');
