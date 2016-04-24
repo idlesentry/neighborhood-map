@@ -95,48 +95,35 @@ var viewModel = function () {
 
   var infowindow = new google.maps.InfoWindow;
   
-  // Creating markers
+ 
   self.allPlaces.forEach(function(place) {
-  
 
-  for (i = 0; i < locationData.length; i++) {
-
-    var latString = JSON.stringify(locationData[i].lat);
-    var lngString = JSON.stringify(locationData[i].lng);
-
+     // Creating markers
     place.marker = new google.maps.Marker({
-      position: locationData[i].latLng,
+      position: place.latLng,
       map: self.googleMap,
     });
 
     //click event for map
-    google.maps.event.addListener(place.marker, 'click', (function(place, i) {
+    google.maps.event.addListener(place.marker, 'click', (function(place) {
         return function() {
 
-          self.googleMap.setZoom(18);
-          self.googleMap.setCenter(locationData[i].latLng);
-          // place.marker.setAnimation(google.maps.Animation.BOUNCE);
-          //   window.setTimeout(function () {
-          //     place.marker.setAnimation(null);
-          //   }, 1500);   
-
-
-          var latString = JSON.stringify(locationData[i].lat);
-          var lngString = JSON.stringify(locationData[i].lng);
-
+          //making coordinates into strings to be able to use in addresses for image and address
+          var latString = JSON.stringify(place.lat);
+          var lngString = JSON.stringify(place.lng);
           var img = "https://maps.googleapis.com/maps/api/streetview?size=200x100&location=" + latString + ',' + lngString + "";
-
           var address = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latString + ',' + lngString + "";
 
+          //setting content that will show in the infowindow
           var contentString =
           '<div id="content">'+
           '<div id="siteNotice">'+
           '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">' + locationData[i].name + '</h1>'+
+          '<h1 id="firstHeading" class="firstHeading">' + place.name + '</h1>'+
           '<div id="bodyContent">'+
           '<img src=' + img + '>' +
-          '<p>' + locationData[i].address + '</p>' +
-          '<p> <a href=' + locationData[i].link + '> '+
+          '<p>' + place.address + '</p>' +
+          '<p> <a href=' + place.link + '> '+
           'Website</a> ' +
           '</p>' +
           '</div>'+
@@ -144,15 +131,20 @@ var viewModel = function () {
           
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
+
+          self.googleMap.setZoom(18);
+          self.googleMap.setCenter(place.marker.getPosition());
+          place.marker.setAnimation(google.maps.Animation.BOUNCE);
+            window.setTimeout(function () {
+              place.marker.setAnimation(null);
+            }, 1500);   
         };
-      })(place, i));
-    } //end of for loop 
+      })(place)); //end of for loop 
   }); //end of self.allplaces.foreach
   
   //click event for list
   self.listClick = function(place) {
     google.maps.event.trigger(place.marker,'click');
-    console.log(place.category);
   };
   
   // Declaring all places as visible initially
@@ -193,6 +185,10 @@ var viewModel = function () {
     this.name = dataObj.name;
     this.latLng = dataObj.latLng;
     this.category = dataObj.category;
+    this.address = dataObj.address;
+    this.link = dataObj.link;
+    this.lat = dataObj.lat;
+    this.lng = dataObj.lng;
     this.marker = ko.observableArray();
   }
 
