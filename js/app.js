@@ -99,7 +99,7 @@ var Place = function (data) {
   this.link = data.link;
   this.lat = data.lat;
   this.lng = data.lng;
-  this.marker = ko.observableArray();
+  this.marker = [];
 }
 
 var viewModel = function () {
@@ -129,8 +129,7 @@ var viewModel = function () {
     //click event for map
     google.maps.event.addListener(place.marker, 'click', (function(place) {
         return function() {
-
-          //making coordinates into strings to be able to use in address for image
+          //making coordinates into strings to be able to use in address for obtaining streetviewimage
           var latString = JSON.stringify(place.lat);
           var lngString = JSON.stringify(place.lng);
           var img = "https://maps.googleapis.com/maps/api/streetview?size=200x100&location=" + latString + ',' + lngString + "";
@@ -146,6 +145,7 @@ var viewModel = function () {
             '</div>' +
           '</center>';
           
+          infowindow.close();
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
 
@@ -161,6 +161,8 @@ var viewModel = function () {
       })(place));
   }); //end of self.allplaces.foreach
   
+
+
   //click event for list
   self.listClick = function(place) {
     google.maps.event.trigger(place.marker,'click');
@@ -177,6 +179,9 @@ var viewModel = function () {
   // Compares user input to place names and adjusts visibility of markers and list items accordingly
   self.filterMarkers = function() {
     var searchInput = self.userInput().toLowerCase();
+
+    //make certain that the infowindow closes when user is entering input in filter field
+    infowindow.close();
     
     self.visiblePlaces.removeAll();
     
