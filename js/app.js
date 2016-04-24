@@ -79,7 +79,7 @@ var viewModel = function () {
 
   self.googleMap = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 48.747713, lng: -122.478874},
-    zoom: 17
+    zoom: 16
   });
   
   // Build "Place" objects out of raw place data. It is common to receive place
@@ -132,12 +132,14 @@ var viewModel = function () {
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
 
-          self.googleMap.setZoom(18);
+          self.googleMap.setZoom(16);
           self.googleMap.setCenter(place.marker.getPosition());
           place.marker.setAnimation(google.maps.Animation.BOUNCE);
             window.setTimeout(function () {
               place.marker.setAnimation(null);
-            }, 1500);   
+            }, 1500); 
+
+          getAPI(place);
         };
       })(place)); //end of for loop 
   }); //end of self.allplaces.foreach
@@ -191,6 +193,56 @@ var viewModel = function () {
     this.lng = dataObj.lng;
     this.marker = ko.observableArray();
   }
+
+  function getAPI(place){
+
+        var $windowContent = $('#content');
+
+        var lat= place.marker.position.lat();
+        var lng = place.marker.position.lng();
+
+
+        // the foursquare api url
+        var url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
+            'ASVWYGNNJUQMUJDX15FVEAUXYIO5JUUK0T5E2QADEXODDADV' +
+            '&client_secret=VGUQB34RJB1T5ZV1MQFFB4K4XVDLY3AOCGRSN5NS2CKVOZED' +
+            '&v=20160423' + '&ll=' + lat + ',' +
+           lng + '&query=\'' + place.name + '\'&limit=1';
+
+  $.getJSON(url, function(response){
+
+        //place the data returned in variables and append this data to the info window
+
+         var venue = response.response.venues[0];
+         var venuePhone = venue.contact.formattedPhone;
+         var venueAddress = venue.location.address;
+         var venueCity = venue.location.city;
+         var venueState = venue.location.state;
+         var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
+
+          if (venuePhone) {
+            $windowContent.append('<p>'+venuePhone+'</p>');
+          }
+
+          else{
+            $windowContent.append('<p> Phone number not found</p>');
+          }
+
+          if (venueAddress) {
+            $windowContent.append('<p>'+ venueFormattedAddress +'</p>');
+          }
+
+          else{
+            $windowContent.append('<p> Address not found </p>');
+          }
+
+
+    }).error(function(e){
+        $windowContent.text('Content could not be loaded');
+    });
+  }
+
+
 
 };
 
