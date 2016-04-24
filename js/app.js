@@ -254,7 +254,8 @@ var viewModel = function () {
           $windowContent.append('<p> Phone number not found</p>');
         }
 
-        if (venueAddress && venueCity && venueState) {
+        //the relative complexity of this if statement was due to Foursquare returning some janky address information for the EAT location that caused me no end of grief
+        if (venueAddress && venueCity && venueState && venueFormattedAddress.length < 32) {
           $windowContent.append('<p>'+ venueFormattedAddress +'</p>');
         }
         else{
