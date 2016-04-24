@@ -112,15 +112,14 @@ var viewModel = function () {
   
   self.allPlaces = [];
 
+  //push data from the model into an array in viewModel
   locationData.forEach(function(place) {
     self.allPlaces.push(new Place(place));
   });
 
   var infowindow = new google.maps.InfoWindow;
   
- 
   self.allPlaces.forEach(function(place) {
-
      // Creating markers
     place.marker = new google.maps.Marker({
       position: place.latLng,
@@ -131,11 +130,10 @@ var viewModel = function () {
     google.maps.event.addListener(place.marker, 'click', (function(place) {
         return function() {
 
-          //making coordinates into strings to be able to use in addresses for image and address
+          //making coordinates into strings to be able to use in address for image
           var latString = JSON.stringify(place.lat);
           var lngString = JSON.stringify(place.lng);
           var img = "https://maps.googleapis.com/maps/api/streetview?size=200x100&location=" + latString + ',' + lngString + "";
-          var address = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latString + ',' + lngString + "";
 
           //setting content that will show in the infowindow
           var contentString =
@@ -161,7 +159,7 @@ var viewModel = function () {
 
           getAPI(place);
         };
-      })(place)); //end of for loop 
+      })(place));
   }); //end of self.allplaces.foreach
   
   //click event for list
@@ -171,12 +169,10 @@ var viewModel = function () {
   
   // Declaring all places as visible initially
   self.visiblePlaces = ko.observableArray();
-  
   self.allPlaces.forEach(function(place) {
     self.visiblePlaces.push(place);
   });
   
-
   self.userInput = ko.observable('');
   
   // Compares user input to place names and adjusts visibility of markers and list items accordingly
@@ -188,23 +184,23 @@ var viewModel = function () {
     self.allPlaces.forEach(function(place) {
       place.marker.setVisible(false);
       
+      //comparing search input to names of places
       if (place.name.toLowerCase().indexOf(searchInput) !== -1) {
         self.visiblePlaces.push(place);
       }
+      //comparing search input to categories of places
       else if (place.category.toLowerCase().indexOf(searchInput) !== -1) {
         self.visiblePlaces.push(place);
       }
     });
     
-    
+    //making visible only the markers that remain in the visiblePlaces array
     self.visiblePlaces().forEach(function(place) {
       place.marker.setVisible(true);
     });
   };
   
-  
-  
-
+  //using foursquare API for more information about places to add to infowindows
   function getAPI(place){
 
         var $windowContent = $('#content');
@@ -213,7 +209,7 @@ var viewModel = function () {
         var lng = place.marker.position.lng();
 
 
-        // the foursquare api url
+        // the foursquare api URL
         var url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
             'ASVWYGNNJUQMUJDX15FVEAUXYIO5JUUK0T5E2QADEXODDADV' +
             '&client_secret=VGUQB34RJB1T5ZV1MQFFB4K4XVDLY3AOCGRSN5NS2CKVOZED' +
@@ -222,16 +218,16 @@ var viewModel = function () {
 
   $.getJSON(url, function(response){
         //place the data returned in variables and append this data to the info window
-         var venue = response.response.venues[0];
-         var venueTwitter = venue.contact.twitter;
-         var venuePhone = venue.contact.formattedPhone;
-         var venueURL = venue.url;
+        var venue = response.response.venues[0];
+        var venueTwitter = venue.contact.twitter;
+        var venuePhone = venue.contact.formattedPhone;
+        var venueURL = venue.url;
 
-         //creating formatted address with spaces
-         var venueAddress = venue.location.address;
-         var venueCity = venue.location.city;
-         var venueState = venue.location.state;
-         var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
+        //creating formatted address with spaces
+        var venueAddress = venue.location.address;
+        var venueCity = venue.location.city;
+        var venueState = venue.location.state;
+        var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
 
         if (venueTwitter) {
           $windowContent.append('<p> Twitter: ' + venueTwitter + '</p>');
@@ -260,15 +256,10 @@ var viewModel = function () {
         else{
           $windowContent.append('<p>'+ place.address +'</p>');
         }
-
-
     }).error(function(e){
         $windowContent.text('Content could not be loaded');
     });
   }
-
-
-
 };
 
 ko.applyBindings(new viewModel());
