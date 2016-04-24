@@ -234,7 +234,7 @@ var viewModel = function () {
         var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
 
         if (venueTwitter) {
-          $windowContent.append('<p> Twitter: ' + venueTwitter + '</p>');
+          $windowContent.append('<p> Twitter: <a href="https://twitter.com/' + venueTwitter + '">' + venueTwitter + ' </a></p>');
         }
         else{
           $windowContent.append('<p> Twitter not found</p>');
