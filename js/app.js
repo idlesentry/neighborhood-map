@@ -70,6 +70,24 @@ var locationData = [
       address: "1228 N State St, Bellingham, WA 98225",
       category: "restaurant, food",
       link: "http://www.oldworlddeli1.com/"
+      },
+      {
+      name: "Avellino",
+      latLng: {lat: 48.750064, lng: -122.477257},
+      lat: 48.750064,
+      lng: -122.477257,
+      address: "1329 Railroad Ave, Bellingham, WA 98225",
+      category: "cafe, coffee, food",
+      link: "http://www.espressoavellino.com/"
+      },
+      {
+      name: "Adagio",
+      latLng: {lat: 48.751192, lng: -122.475510},
+      lat: 48.751192,
+      lng: -122.475510,
+      address: "1435 Railroad Ave, Bellingham, WA 98225",
+      category: "cafe, coffee, food",
+      link: "https://locu.com/places/caffe-adagio-bellingham-us/#menu/"
       }
   ];
 
@@ -116,18 +134,18 @@ var viewModel = function () {
 
           //setting content that will show in the infowindow
           var contentString =
-          '<div id="content">'+
+          '<center><div id="content">'+
           '<div id="siteNotice">'+
           '</div>'+
           '<h1 id="firstHeading" class="firstHeading">' + place.name + '</h1>'+
           '<div id="bodyContent">'+
           '<img src=' + img + '>' +
-          '<p>' + place.address + '</p>' +
-          '<p> <a href=' + place.link + '> '+
-          'Website</a> ' +
+          // '<p>' + place.address + '</p>' +
+          // '<p> <a href=' + place.link + '> '+
+          // 'Website</a> ' +
           '</p>' +
           '</div>'+
-          '</div>';
+          '</div></center>';
           
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
@@ -210,31 +228,45 @@ var viewModel = function () {
            lng + '&query=\'' + place.name + '\'&limit=1';
 
   $.getJSON(url, function(response){
-
         //place the data returned in variables and append this data to the info window
-
          var venue = response.response.venues[0];
+         var venueTwitter = venue.contact.twitter;
          var venuePhone = venue.contact.formattedPhone;
+         var venueURL = venue.url;
+
+         //creating formatted address with spaces
          var venueAddress = venue.location.address;
          var venueCity = venue.location.city;
          var venueState = venue.location.state;
          var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
 
-          if (venuePhone) {
-            $windowContent.append('<p>'+venuePhone+'</p>');
-          }
+        if (venueTwitter) {
+          $windowContent.append('<p> Twitter: ' + venueTwitter + '</p>');
+        }
+        else{
+          $windowContent.append('<p> Twitter not found</p>');
+        }
 
-          else{
-            $windowContent.append('<p> Phone number not found</p>');
-          }
+        if (venueURL) {
+          $windowContent.append('<p> <a href="'+ venueURL + '">' + venueURL + ' </a></p>');
+        }
+        else{
+          $windowContent.append('<p> <a href="'+ place.link + '">' + place.link + ' </a></p>');
+        }
 
-          if (venueAddress) {
-            $windowContent.append('<p>'+ venueFormattedAddress +'</p>');
-          }
+        if (venuePhone) {
+          $windowContent.append('<p>'+venuePhone+'</p>');
+        }
+        else{
+          $windowContent.append('<p> Phone number not found</p>');
+        }
 
-          else{
-            $windowContent.append('<p> Address not found </p>');
-          }
+        if (venueAddress) {
+          $windowContent.append('<p>'+ venueFormattedAddress +'</p>');
+        }
+        else{
+          $windowContent.append('<p>'+ place.address +'</p>');
+        }
 
 
     }).error(function(e){
