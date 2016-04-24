@@ -110,11 +110,6 @@ var viewModel = function () {
     zoom: 16
   });
   
-  // Build "Place" objects out of raw place data. It is common to receive place
-  // data from an API like FourSquare. Place objects are defined by a custom
-  // constructor function you write, which takes what you need from the original
-  // data and also lets you add on anything else you need for your app, not
-  // limited by the original data.
   self.allPlaces = [];
 
   locationData.forEach(function(place) {
