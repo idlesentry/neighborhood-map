@@ -4,7 +4,7 @@ var locationData = [
         latLng: {lat: 48.749363, lng: -122.476122},
         lat: 48.749363,
         lng: -122.476122,
-        address: "1327 N State St, Bellingham, WA 98225",
+        address: "1327 N State St, Bellingham, WA",
         category: "bar",
         link: "http://www.thecopperhog.com/"
       },
@@ -13,7 +13,7 @@ var locationData = [
         latLng: {lat: 48.747622, lng: -122.478530},
         lat: 48.747622,
         lng: -122.478530,
-        address: "114 W Magnolia St, Bellingham, WA 98225",
+        address: "114 W Magnolia St, Bellingham, WA",
         category: "cafe, coffee",
         link: "http://theunioncoffee.com/"
       },
@@ -22,7 +22,7 @@ var locationData = [
         latLng: {lat: 48.747631, lng: -122.477969},
         lat: 48.747631,
         lng: -122.477969,
-        address: "1220 N State St, Bellingham, WA 98225",
+        address: "1220 N State St, Bellingham, WA",
         category: "bar, food",
         link: "https://www.facebook.com/theracketbham/"
       },
@@ -31,7 +31,7 @@ var locationData = [
         latLng: {lat: 48.747830, lng: -122.477539},
         lat: 48.747830,
         lng: -122.477539,
-        address: "1232 N State St, Bellingham, WA 98225",
+        address: "1232 N State St, Bellingham, WA",
         category: "restaurant, food",
         link: "http://www.rudysbham.com/"
       },
@@ -40,7 +40,7 @@ var locationData = [
         latLng: {lat: 48.749717, lng: -122.477788},
         lat: 48.749717,
         lng: -122.477788,
-        address: "1313 Railroad Ave, Bellingham, WA 98225",
+        address: "1313 Railroad Ave, Bellingham, WA",
         category: "restaurant, food",
         link: "http://avenuebread.com/"
       },
@@ -49,7 +49,7 @@ var locationData = [
         latLng: {lat: 48.745839, lng: -122.481337},
         lat: 48.745839,
         lng: -122.481337,
-        address: "1017 N State St, Bellingham, WA 98225",
+        address: "1017 N State St, Bellingham, WA",
         category: "bar",
         link: "http://www.redlightbellingham.com/"
       },
@@ -58,7 +58,7 @@ var locationData = [
       latLng: {lat: 48.748775, lng: -122.480317},
       lat: 48.748775,
       lng: -122.480317,
-      address: "1200 Cornwall Ave, Bellingham, WA 98225",
+      address: "1200 Cornwall Ave, Bellingham, WA",
       category: "restaurant, bar, food",
       link: "http://www.4u2eat.com/"
       },
@@ -67,7 +67,7 @@ var locationData = [
       latLng: {lat: 48.747750, lng: -122.477694},
       lat: 48.747750,
       lng: -122.477694,
-      address: "1228 N State St, Bellingham, WA 98225",
+      address: "1228 N State St, Bellingham, WA",
       category: "restaurant, food",
       link: "http://www.oldworlddeli1.com/"
       },
@@ -76,7 +76,7 @@ var locationData = [
       latLng: {lat: 48.750064, lng: -122.477257},
       lat: 48.750064,
       lng: -122.477257,
-      address: "1329 Railroad Ave, Bellingham, WA 98225",
+      address: "1329 Railroad Ave, Bellingham, WA",
       category: "cafe, coffee, food",
       link: "http://www.espressoavellino.com/"
       },
@@ -85,7 +85,7 @@ var locationData = [
       latLng: {lat: 48.751192, lng: -122.475510},
       lat: 48.751192,
       lng: -122.475510,
-      address: "1435 Railroad Ave, Bellingham, WA 98225",
+      address: "1435 Railroad Ave, Bellingham, WA",
       category: "cafe, coffee, food",
       link: "https://locu.com/places/caffe-adagio-bellingham-us/#menu/"
       }
@@ -129,7 +129,7 @@ var viewModel = function () {
           //making coordinates into strings to be able to use in addresses for image and address
           var latString = JSON.stringify(place.lat);
           var lngString = JSON.stringify(place.lng);
-          var img = "https://maps.googleapis.com/maps/api/streetview?size=200x100&location=" + latString + ',' + lngString + "";
+          var img = "https://maps.googleapis.com/maps/api/streetview?size=350x175&location=" + latString + ',' + lngString + "";
           var address = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latString + ',' + lngString + "";
 
           //setting content that will show in the infowindow
@@ -140,9 +140,6 @@ var viewModel = function () {
           '<h1 id="firstHeading" class="firstHeading">' + place.name + '</h1>'+
           '<div id="bodyContent">'+
           '<img src=' + img + '>' +
-          // '<p>' + place.address + '</p>' +
-          // '<p> <a href=' + place.link + '> '+
-          // 'Website</a> ' +
           '</p>' +
           '</div>'+
           '</div></center>';
@@ -261,7 +258,7 @@ var viewModel = function () {
           $windowContent.append('<p> Phone number not found</p>');
         }
 
-        if (venueAddress) {
+        if (venueAddress && venueCity && venueState) {
           $windowContent.append('<p>'+ venueFormattedAddress +'</p>');
         }
         else{
