@@ -137,15 +137,14 @@ var viewModel = function () {
 
           //setting content that will show in the infowindow
           var contentString =
-          '<center><div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">' + place.name + '</h1>'+
-          '<div id="bodyContent">'+
-          '<img src=' + img + '>' +
-          '</p>' +
-          '</div>'+
-          '</div></center>';
+          '<center>' +
+            '<div id="content">'+
+              '<h1 id="firstHeading" class="firstHeading">' + place.name + '</h1>'+
+                '<div id="bodyContent">'+
+                '<img src=' + img + '>' +
+                '</div>'+
+            '</div>' +
+          '</center>';
           
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
