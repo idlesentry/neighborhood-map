@@ -27,7 +27,7 @@ input {
 
 #list-view {
   position: fixed;
-  top: 50px;
+  top: 40px;
   right: 20px;
   width: 200px;
   background-color: #fff;
@@ -46,7 +46,7 @@ li {
   font: 12px sans-serif;
 }
 
-/*html, body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -58,47 +58,6 @@ li {
 
 #content {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 300;
 }
-
-#form {
-    position: absolute;
-    left: 3%;
-    top: 65%;
-    width: 12%;
-    height: 5%;
-    z-index: 2;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: 600;
-    background-color: #white;
-}
-
-.list {
-    position: absolute;
-    left: 3%;
-    top: 50px;
-    top: 70%;
-    width: 12%;
-    height: 25%;
-    z-index: 2;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: 600;
-    background-color: white;
-    cursor: pointer;
-}
-
-.controls {
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 40px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-}*/
