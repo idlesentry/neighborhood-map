@@ -145,7 +145,6 @@ var viewModel = function () {
             '</div>' +
           '</center>';
           
-          infowindow.close();
           infowindow.setContent(contentString);
           infowindow.open(self.googleMap, this);
 
@@ -161,8 +160,6 @@ var viewModel = function () {
       })(place));
   }); //end of self.allplaces.foreach
   
-
-
   //click event for list
   self.listClick = function(place) {
     google.maps.event.trigger(place.marker,'click');
@@ -208,10 +205,8 @@ var viewModel = function () {
   function getAPI(place){
 
         var $windowContent = $('#content');
-
         var lat= place.marker.position.lat();
         var lng = place.marker.position.lng();
-
 
         // the foursquare api URL
         var url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
@@ -233,6 +228,7 @@ var viewModel = function () {
         var venueState = venue.location.state;
         var venueFormattedAddress = venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state;
 
+        //appending content to infowindow if it is available, otherwise an error message
         if (venueTwitter) {
           $windowContent.append('<p> Twitter: <a href="https://twitter.com/' + venueTwitter + '">' + venueTwitter + ' </a></p>');
         }
