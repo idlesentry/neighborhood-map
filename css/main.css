@@ -1,47 +1,47 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #map {
-  height: 100%;
+    height: 100%;
 }
 
 input {
-  position: fixed;
-  right: 20px;
-  top: 10px;
-  height: 40px;
-  width: 200px;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 600;
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    height: 40px;
+    width: 200px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 #list-view {
-  position: fixed;
-  top: 40px;
-  right: 20px;
-  width: 200px;
-  background-color: #fff;
-  margin: 0;
-  padding: 0;
-  font-size: 30px;
-  font-weight: 800;
-  background-color: white;
-  cursor: pointer;
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    width: 200px;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: white;
+    cursor: pointer;
 }
 
 li {
-  margin-left: 20px;
-  padding: 2px 0;
-  font: 12px sans-serif;
+    margin-left: 20px;
+    padding: 2px 0;
+    font: 12px sans-serif;
 }
 
 html, body {
@@ -55,10 +55,10 @@ html, body {
 }
 
 #content {
-  line-height: 50%;
-  height: 225px;
-  width: 325px;
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
+    line-height: 50%;
+    height: 225px;
+    width: 325px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
 }
