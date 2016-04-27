@@ -110,6 +110,7 @@ var locationData = [{
     link: "https://locu.com/places/caffe-adagio-bellingham-us/#menu/"
 }];
 
+//model
 var Place = function(data) {
     this.name = data.name;
     this.latLng = data.latLng;
@@ -121,16 +122,22 @@ var Place = function(data) {
     this.marker = [];
 }
 
-var viewModel = function() {
-    var self = this;
-
-    self.googleMap = new google.maps.Map(document.getElementById('map'), {
+//callback for google maps api
+var initMap = function() {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: 48.747713,
             lng: -122.478874
         },
         zoom: 16
     });
+
+    var vm = new viewModel();
+    ko.applyBindings(vm);
+}
+
+var viewModel = function() {
+    var self = this;
 
     self.allPlaces = [];
 
@@ -145,7 +152,7 @@ var viewModel = function() {
         // Creating markers
         place.marker = new google.maps.Marker({
             position: place.latLng,
-            map: self.googleMap,
+            map: map,
         });
 
         //click event for map
@@ -168,10 +175,10 @@ var viewModel = function() {
                     '</center>';
 
                 infowindow.setContent(contentString);
-                infowindow.open(self.googleMap, this);
+                infowindow.open(map, this);
 
-                self.googleMap.setZoom(16);
-                self.googleMap.setCenter(place.marker.getPosition());
+                map.setZoom(16);
+                map.setCenter(place.marker.getPosition());
                 place.marker.setAnimation(google.maps.Animation.BOUNCE);
                 window.setTimeout(function() {
                     place.marker.setAnimation(null);
@@ -280,5 +287,3 @@ var viewModel = function() {
         });
     }
 };
-
-ko.applyBindings(new viewModel());
